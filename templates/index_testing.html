@@ -13,7 +13,7 @@
         <div id="map">
         </div>
         <div id="list-container">
-            <form id="listForm">
+            <form id="listForm" action="/process_form" method="post">
                 <legend> Restaurants </legend>
                     {% for place in places %}
                         <div id="{{place.address}}" onmouseover="iconReaction(this.id)" onmouseout="iconUndoReaction(this.id)">
@@ -29,7 +29,8 @@
                             </label>
                         </div>
                     {% endfor %}
-                <input type="submit" value="Submit Favorites" onclick="showMeTheData('listForm')">
+                <input type="submit" value="Submit Favorites">
+                <!-- onclick="showMeTheData('listForm')" -->
             </form>
         </div>
     </div>

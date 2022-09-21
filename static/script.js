@@ -214,7 +214,7 @@ const addToFavs = (address) => {
 // for loop or access by id
 // if you access by id will it even work?
 // how would you know what is clicked and what is not clicked
-const showMeTheData = (listForm) => {
-    var data = document.getElementById(listForm);
-    console.log(data.outerHTML);
-}
+// const showMeTheData = (listForm) => {
+//     var data = document.getElementById(listForm);
+//     console.log(data.outerHTML);
+// }

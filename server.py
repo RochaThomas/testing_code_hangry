@@ -1,6 +1,7 @@
 
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, session, request
 app = Flask(__name__)
+app.secret_key = "Secret secrets are no fun secret secrets hurt someone"
 
 @app.route("/")
 def testing_something():
@@ -32,6 +33,21 @@ def testing_something():
     ];
 
     return render_template("index_testing.html", places = places)
+
+@app.route("/process_form", methods=['POST'])
+def process_form():
+    session['form'] = request.form
+    return redirect("/form_results")
+
+@app.route("/form_results")
+def disp_form_results():
+    form = session['form']
+
+    addresses = []
+    for key in form:
+        addresses.append(form[key])
+        
+    return render_template("testing_form_results.html", addresses=addresses)
 
 if __name__ == "__main__":
     app.run(debug=True)
