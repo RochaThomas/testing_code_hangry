@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing Map Stuff</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Testing Map Stuff</h1>
+    <div class="map-list-container">
+        <div id="map">
+        </div>
+        <div id="list-container">
+            <form id="listForm">
+                <legend> Restaurants </legend>
+                    {% for place in places %}
+                        <div id="{{place.address}}" onmouseover="iconReaction(this.id)" onmouseout="iconUndoReaction(this.id)">
+                            <!-- maybe find a different id because what if 
+                            there are two of the same restaurants with different locations-->
+                            <input type="checkbox" name="{{place.name}}" id="{{place.name}}" value="{{place.address}}" onclick="addToFavs(this.value)">
+                            <label for="{{place.name}}">
+                                {{place.name}}
+                                <br>
+                                {{place.address}}
+                                <!-- other stuff
+                                like distance, website, description, etc-->
+                            </label>
+                        </div>
+                    {% endfor %}
+                <input type="submit" value="Submit Favorites" onclick="showMeTheData('listForm')">
+            </form>
+        </div>
+    </div>
+</body>
+<script src="/static/script.js"></script>
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApYkTOlVGaCHsdFi6DFG3JwH4y272RH1M&callback=initMap&v=weekly"
+    defer
+></script>
+</html>
