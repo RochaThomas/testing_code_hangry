@@ -13,27 +13,6 @@
         <div id="map">
         </div>
         <div id="list-container">
-            <!-- <form id="listForm" action="/process_form" method="post">
-                <legend> Restaurants </legend>
-                    {% for place in places %}
-                        <div id="{{place.address}}" onmouseover="iconReaction(this.id)" onmouseout="iconUndoReaction(this.id)">
-                            maybe find a different id because what if 
-                            there are two of the same restaurants with different locations
-                            <input type="checkbox" name="{{place.name}}" id="{{place.name}}" value="{{place.address}}" onclick="addToFavs(this.value)">
-                            <label for="{{place.name}}">
-                                {{place.name}}
-                                <br>
-                                {{place.address}}
-                                other stuff
-                                like distance, website, description, etc
-                            </label>
-                        </div>
-                    {% endfor %}
-                <input type="submit" value="Submit Favorites">
-                onclick="showMeTheData('listForm')"
-            </form>   -->
-
-            <!-- testing second version of initMap -->
             <form id="places" action="/process_form" method="post">
                 <legend> Restaurants </legend>
                 <!-- this will be propagated by the js file -->
