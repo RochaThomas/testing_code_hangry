@@ -12,3 +12,8 @@
 .map-list-container {
     display: flex;
 }
+
+#places {
+    display: flex;
+    flex-direction: column;
+}
