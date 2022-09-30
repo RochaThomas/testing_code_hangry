@@ -23,7 +23,8 @@ function initMap(){
     const request = {
         location: sj,
         radius: 500,
-        type: "restaurant"
+        type: "restaurant",
+        fields: ["name", "geometry"],
     };
 
     const callback = (results, status) => {
@@ -129,4 +130,41 @@ function initMap(){
     
 }
 
+function initAutocomplete() {
+    let restaurantName = document.querySelector("#name");
+    let streetAddress = document.querySelector("#street_address");
+    let city = document.querySelector("#city");
+    let state = document.querySelector("#state");
+    let zipCode = document.querySelector("#zip_code");
+
+    const autocomplete = new google.maps.places.Autocomplete(restaurantName, {
+        componentRestrictions: { country: ["us"] },
+        fields: ["address_components", "geometry"],
+        types: ["restaurant"],
+    });
+
+    const fillInAddress = () => {
+        const place = autocomplete.getPlace();
+        let autoRestaurantName = "";
+        let autoStreetAddress = "";
+        let autoCity = "";
+        let autoState = "";
+        let autoZipCode = "";
+
+        for (const component of place.address_components) {
+            const componentType = component.types[0];
+            
+            switch (componentType) {
+                case "street_number": {
+
+                }
+            }
+
+        }
+    }
+
+    autocomplete.addListener("place_changed", fillInAddress);
+}
+
 window.initMap = initMap;
+window.initAutocomplete = initAutocomplete;

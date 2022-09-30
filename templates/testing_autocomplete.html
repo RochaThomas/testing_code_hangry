@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing Autocomplete</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Testing Autocomplete Function</h1>
+    <form action="">
+        <div class="input-container">
+            <label for="name">Restaurant Name: </label>
+            <input type="text" name="name" id="name">
+        </div>
+        <div class="input-container">
+            <label for="street_address">Address: </label>
+            <input type="text" name="street_address" id="street_address">
+        </div>
+        <div class="input-container">
+            <label for="city">City: </label>
+            <input type="text" name="city" id="city">
+        </div>
+        <div class="input-container">
+            <label for="state">State: </label>
+            <input type="text" name="state" id="state">
+        </div>
+        <div class="input-container">
+            <label for="zipcode">Zip Code: </label>
+            <input type="text" name="zip_code" id="zip_code">
+        </div>
+        <input type="submit" value="Add Restaurant">
+    </form>
+    <a href="/">Go Back</a>
+</body>
+<script src="/static/script.js"></script>
+<script 
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApYkTOlVGaCHsdFi6DFG3JwH4y272RH1M&libraries=places&callback=initAutocomplete&v=weekly"
+    defer
+></script>
+</html>
