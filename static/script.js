@@ -139,13 +139,13 @@ function initAutocomplete() {
 
     const autocomplete = new google.maps.places.Autocomplete(restaurantName, {
         componentRestrictions: { country: ["us"] },
-        fields: ["address_components", "geometry"],
+        fields: ["address_components", "geometry", "name"],
         types: ["restaurant"],
     });
 
     const fillInAddress = () => {
         const place = autocomplete.getPlace();
-        let autoRestaurantName = "";
+        let autoRestaurantName = place.name;
         let autoStreetAddress = "";
         let autoCity = "";
         let autoState = "";
@@ -156,13 +156,37 @@ function initAutocomplete() {
             
             switch (componentType) {
                 case "street_number": {
-
+                    autoStreetAddress = `${component.long_name} ${autoStreetAddress}`;
+                    break;
+                }
+                case "route": {
+                    autoStreetAddress += component.short_name;
+                    break;
+                }
+                case "postal_code": {
+                    autoZipCode = `${component.long_name}${autoZipCode}`;
+                    break;
+                }
+                case "postal_code_suffix": {
+                    autoZipCode = `${autoZipCode}-${component.long_name}`;
+                    break;
+                }
+                case "locality": {
+                    autoCity = component.long_name;
+                    break;
+                }
+                case "administrative_area_level_1": {
+                    autoState = component.short_name;
+                    break;
                 }
             }
-
         }
+        restaurantName.value = autoRestaurantName;
+        streetAddress.value = autoStreetAddress;
+        city.value = autoCity;
+        state.value = autoState;
+        zipCode.value = autoZipCode;
     }
-
     autocomplete.addListener("place_changed", fillInAddress);
 }
 
