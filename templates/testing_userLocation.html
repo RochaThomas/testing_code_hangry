@@ -9,10 +9,10 @@
 <body>
     <h1>Testing User Location</h1>
     <a href="/">BACK</a>
-    <form action="" method="post">
+    <form action="/process_user_location" method="post">
         <button><a href="">Manual Entry</a></button>
         <input type="hidden" name="user_location">
-        <input type="button" value="Use My Location">
+        <input type="button" value="Use My Location" onclick="getUserLocation()">
     </form>
 </body>
 </html>
