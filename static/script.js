@@ -139,6 +139,7 @@ function initAutocomplete() {
 
     const autocomplete = new google.maps.places.Autocomplete(restaurantName, {
         componentRestrictions: { country: ["us"] },
+        // add bounds for lng and lat to limit search area
         fields: ["address_components", "geometry", "name"],
         types: ["restaurant"],
     });
