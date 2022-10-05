@@ -250,6 +250,12 @@ const findLatLngManualEntry = () => {
             let hiddenLat = document.getElementById("lat")
             let hiddenLng = document.getElementById("lng")
 
+            // this isn't working because the lat and lng return a function
+            // not a value
+            // find a way to fix this
+            // sending location instead of lat and lng might work but
+            // passing an object might not work because it might be passed
+            // as a string
             hiddenLat.value = res.lat;
             hiddenLng.value = res.lng;
             document.forms["manual_entry_form"].submit();
