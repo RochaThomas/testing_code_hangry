@@ -199,6 +199,7 @@ function initAutocomplete() {
     autocomplete.addListener("place_changed", fillInAddress);
 };
 
+// fix error handling of user location
 const getUserLocation = () => {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
@@ -229,8 +230,35 @@ const handleLocationError = (browserHasGeolocation) => {
 
 const findLatLngManualEntry = () => {
     // fill this out to determine the lat and lng of user location
-    // fix error handling of user location
-}
+    // use address to find the lat and lng and set the hidden inputs
+    // of the manual entry form
+    let streetAddressInput = document.getElementById("street_address").value;
+    let cityInput = document.getElementById("city").value
+    let stateInput = document.getElementById("state").value
+    let zipCodeInput = document.getElementById("zip_code").value
+
+    let address = streetAddressInput + " "
+                + cityInput + " "
+                + stateInput + " "
+                + zipCodeInput;
+
+    const geocoder = new google.maps.Geocoder();
+    geocoder.geocode( {'address': address} )
+        .then((results) => {
+            console.log("results.results[0]", results.results[0].geometry.location.lat);
+            const res = results.results[0].geometry.location;
+            let hiddenLat = document.getElementById("lat")
+            let hiddenLng = document.getElementById("lng")
+
+            hiddenLat.value = res.lat;
+            hiddenLng.value = res.lng;
+            document.forms["manual_entry_form"].submit();
+        })
+        .catch((error) => {
+            alert("Geocode failed: " + error);
+            console.log("Geocode failed: " + error);
+        })
+};
 
 window.initMap = initMap;
 window.initAutocomplete = initAutocomplete;
