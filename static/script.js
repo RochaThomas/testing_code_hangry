@@ -11,17 +11,25 @@ function initMap(){
         url: "/static/checkPin.png",
         scaledSize: new google.maps.Size(25, 25),
         anchor: new google.maps.Point(0,25),
-    }
+    };
 
-    const sj = { lat: 37.3387, lng: -121.8853 };
+    const userLat = Number(document.getElementById("lat").value);
+    const userLng = Number(document.getElementById("lng").value);
+
+    const userLocation = { lat: userLat, lng: userLng };
     const map = new google.maps.Map(document.getElementById("map"), {
         zoom: 17,
-        center: sj,
+        center: userLocation,
+    });
+
+    new google.maps.Marker({
+        position: userLocation,
+        map: map,
     });
 
     const service = new google.maps.places.PlacesService(map);
     const request = {
-        location: sj,
+        location: userLocation,
         radius: 500,
         type: "restaurant",
         fields: ["name", "geometry"],
@@ -128,7 +136,7 @@ function initMap(){
 
     service.nearbySearch(request, callback);
     
-}
+};
 
 function initAutocomplete() {
     let restaurantName = document.querySelector("#name");
@@ -189,6 +197,39 @@ function initAutocomplete() {
         zipCode.value = autoZipCode;
     }
     autocomplete.addListener("place_changed", fillInAddress);
+};
+
+const getUserLocation = () => {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                hiddenLat = document.getElementById("lat");
+                hiddenLng = document.getElementById("lng");
+
+                hiddenLat.value = position.coords.latitude;
+                hiddenLng.value = position.coords.longitude;
+
+                document.forms["user_location_form"].submit();
+            },
+            () => {
+                handleLocationError(true)
+            }
+        );
+    }
+    else {
+        handleLocationError(false);
+    }
+};
+
+const handleLocationError = (browserHasGeolocation) => {
+    browserHasGeolocation
+        ? alert("Error: The geolocation service failed")
+        : alert("Error: Your browser does not support geolocation")
+};
+
+const findLatLngManualEntry = () => {
+    // fill this out to determine the lat and lng of user location
+    // fix error handling of user location
 }
 
 window.initMap = initMap;

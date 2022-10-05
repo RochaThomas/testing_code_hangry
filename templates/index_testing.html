@@ -11,6 +11,8 @@
     <h1>Testing Map Stuff</h1>
     <div class="map-list-container">
         <div id="map">
+            <input type="hidden" id="lat" name="lat" value={{lat}}>
+            <input type="hidden" id="lng" name="lng" value={{lng}}>
         </div>
         <div id="list-container">
             <form id="places" action="/process_form" method="post">
@@ -20,6 +22,7 @@
         </div>
     </div>
     <a href="/testing_autocomplete">Go To Test Autocomplete</a>
+    <a href="/testing_user_location">Go To Test User Location</a>
 </body>
 <script src="/static/script.js"></script>
 <script
