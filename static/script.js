@@ -229,9 +229,6 @@ const handleLocationError = (browserHasGeolocation) => {
 };
 
 const findLatLngManualEntry = () => {
-    // fill this out to determine the lat and lng of user location
-    // use address to find the lat and lng and set the hidden inputs
-    // of the manual entry form
     let streetAddressInput = document.getElementById("street_address").value;
     let cityInput = document.getElementById("city").value
     let stateInput = document.getElementById("state").value
@@ -250,14 +247,8 @@ const findLatLngManualEntry = () => {
             let hiddenLat = document.getElementById("lat")
             let hiddenLng = document.getElementById("lng")
 
-            // this isn't working because the lat and lng return a function
-            // not a value
-            // find a way to fix this
-            // sending location instead of lat and lng might work but
-            // passing an object might not work because it might be passed
-            // as a string
-            hiddenLat.value = res.lat;
-            hiddenLng.value = res.lng;
+            hiddenLat.value = res.lat();
+            hiddenLng.value = res.lng();
             document.forms["manual_entry_form"].submit();
         })
         .catch((error) => {
